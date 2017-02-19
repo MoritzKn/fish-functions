@@ -8,5 +8,7 @@ function unpack
             untarbz
         case '*.tar'
             untar $argv
+		case '*.rar'
+			unrar e $argv
     end
 end
