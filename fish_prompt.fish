@@ -20,5 +20,5 @@ function fish_prompt --description 'Prompt ausgeben'
 	end
 	
 	# $USER
-	echo -n -s (set_color $color_cwd) (prompt_pwd) (set_color normal) "$suffix "
+	echo -n -s (cat /etc/hostname) (set_color $color_cwd) (prompt_pwd) (set_color normal) "$suffix "
 end
