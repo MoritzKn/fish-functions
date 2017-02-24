@@ -5,12 +5,12 @@ function oiw --description 'Find a project/folder in your workspace and cd into 
 			-maxdepth 5 \
 			'(' \
 				-name 'node_modules' \
-				-o -name '.git'\
-				-o -name 'src'\
-				-o -name 'res'\
-				-o -name 'lib'\
-				-o -name 'spec'\
-				-o -name 'Assets'\
+				-o -name '.git' \
+				-o -name 'src' \
+				-o -name 'res' \
+				-o -name 'lib' \
+				-o -name 'spec' \
+				-o -name 'Assets' \
 			')' \
 			-prune \
 			-o '(' \
@@ -23,13 +23,12 @@ function oiw --description 'Find a project/folder in your workspace and cd into 
 			-print
 	end
 
-	set shortest ( \
-		find_folders $argv \
-			| awk '{ print length($0) " " $0; }' \
-			| sort -n \
-			| cut -d ' ' -f 2- \
-			| head -1 \
-	)
+	find_folders $argv \
+		| awk '{ print length($0) " " $0; }' \
+		| sort -n \
+		| cut -d ' ' -f 2- \
+		| head -1 \
+		| read shortest
 
 	cd $shortest
 
