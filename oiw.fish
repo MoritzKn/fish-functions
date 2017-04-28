@@ -1,5 +1,5 @@
-function oiw --description 'Find a project/folder in your workspace and cd into it'
-	function find_folders
+function oiw --description 'Find a project/folder in your workspace and cd into it' --argument query
+	function find_folders --argument query
 		find $HOME \
 			-mindepth 1 \
 			-maxdepth 5 \
@@ -16,14 +16,14 @@ function oiw --description 'Find a project/folder in your workspace and cd into 
 			-o '(' \
 				-type d \
 				'(' \
-					-iwholename "$HOME/workspace*$argv*" \
-					-o -iwholename "$HOME/code/*$argv*" \
+					-iwholename "$HOME/workspace*$query*" \
+					-o -iwholename "$HOME/code/*$query*" \
 				')' \
 			')' \
 			-print
 	end
 
-	find_folders $argv \
+	find_folders $query \
 		| awk '{ print length($0) " " $0; }' \
 		| sort -n \
 		| cut -d ' ' -f 2- \
