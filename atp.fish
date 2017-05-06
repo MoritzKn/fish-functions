@@ -1,3 +1,3 @@
 function atp --description 'Add to PATH'
-	set PATH $PATH (pwd) $argv;
+    set PATH $PATH (pwd)
 end
