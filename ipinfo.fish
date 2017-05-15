@@ -1,3 +1,3 @@
 function ipinfo
-	curl http://ipinfo.io/ $argv;
+    curl http://ipinfo.io/ $argv
 end

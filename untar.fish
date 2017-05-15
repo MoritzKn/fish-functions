@@ -1,3 +1,3 @@
 function untar
-	tar -xf $argv;
+    tar -xf $argv
 end

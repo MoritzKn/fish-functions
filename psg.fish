@@ -1,3 +1,3 @@
-function psg
-	ps aux | grep $argv
+function psg --description='grep from ps aux'
+    ps aux | grep $argv
 end

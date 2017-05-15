@@ -1,3 +1,3 @@
 function lc --description 'line count'
-	wc -l $argv;
+    wc -l $argv
 end

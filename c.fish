@@ -1,3 +1,3 @@
-function c
-	clear  $argv;
+function c --description 'clear'
+    clear  $argv
 end
