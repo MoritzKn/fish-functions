@@ -7,5 +7,5 @@ function tid --description 'Today I did -- Show what you did in the current git 
         -e '/white space/Id' \
         -e '/indent/Id' \
         -e '/Release/Id' \
-        -e 's/[a-z0-9]*/-/'
+        -e 's/^[^ ]*/-/'
 end
