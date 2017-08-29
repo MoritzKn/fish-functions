@@ -10,7 +10,7 @@ function do --description 'Do what I want'
     end
 
     switch $subject
-        case 'git@*.git'
+        case 'git@*.git' 'https://*.git' 'git://*'
             set command 'git clone'
         case '*.tgz' '*.tbz' '*.tar' '*.tar.*' '*.zip' '*.rar'
             set command 'unpack'
