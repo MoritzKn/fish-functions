@@ -7,7 +7,10 @@ function oiw --description 'Find a project/folder in your workspace and cd into 
                 -name 'node_modules' \
                 -o -name '.git' \
                 -o -name 'src' \
+                -o -name 'source' \
                 -o -name 'res' \
+                -o -name 'resources' \
+                -o -name 'out' \
                 -o -name 'lib' \
                 -o -name 'spec' \
                 -o -name 'Assets' \
