@@ -3,9 +3,13 @@ function do --description 'Do what I want'
     set -l command ''
 
     if test -z "$subject"
-        set subject (xclip -o -selection clipboard)
-        if test -z "$subject"
-            set subject (xclip -o)
+        if which xclip > /dev/null
+            set subject (xclip -o -selection clipboard)
+            if test -z "$subject"
+                set subject (xclip -o)
+            end
+        else if which pbpaste > /dev/null
+            set subject (pbpaste)
         end
     end
 
