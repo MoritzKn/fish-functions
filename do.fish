@@ -13,7 +13,14 @@ function do --description 'Do what I want'
         end
     end
 
-    switch $subject
+    set subject (string trim $subject)
+
+    if test -z "$subject"
+        echo 'Nothing to do'
+        exit
+    end
+
+    switch "$subject"
         case 'git@*.git' 'https://*.git' 'git://*'
             set command 'git clone'
         case '*.tgz' '*.tbz' '*.tar' '*.tar.*' '*.zip' '*.rar'
