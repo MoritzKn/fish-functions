@@ -1,8 +1,5 @@
 function fish_prompt --description 'Prompt ausgeben'
-    # Just calculate this once, to save a few cycles when displaying the prompt
-    if not set -q __fish_prompt_hostname
-        set -g __fish_prompt_hostname (hostname|cut -d . -f 1)
-    end
+    set hostname (hostname | cut -d . -f 1)
 
     set -l color_cwd
     set -l suffix
@@ -20,5 +17,5 @@ function fish_prompt --description 'Prompt ausgeben'
     end
 
     # $USER
-    echo -n -s (cat /etc/hostname) (set_color $color_cwd) (prompt_pwd) (set_color normal) "$suffix "
+    echo -n -s $hostname (set_color $color_cwd) (prompt_pwd) (set_color normal) "$suffix "
 end
