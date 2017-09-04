@@ -1,19 +1,54 @@
+# Defined in /tmp/fish.CDCVU3/oiw.fish @ line 2
 function oiw --description 'Find a project/folder in your workspace and cd into it'
-    function find_folders
+	function find_folders
         find $HOME \
             -mindepth 1 \
             -maxdepth 5 \
             '(' \
                 -name 'node_modules' \
-                -o -name '.git' \
-                -o -name 'src' \
-                -o -name 'source' \
-                -o -name 'res' \
-                -o -name 'resources' \
-                -o -name 'out' \
-                -o -name 'lib' \
-                -o -name 'spec' \
-                -o -name 'Assets' \
+                -o -name '.*' \
+                -o -name '_*' \
+                -o -iname 'bin' \
+                -o -iname 'lib' \
+                -o -iname 'src' \
+                -o -iname 'source' \
+                -o -iname 'scripts' \
+                -o -iname 'res' \
+                -o -iname 'resources' \
+                -o -iname 'out' \
+                -o -iname 'dist' \
+                -o -iname 'data' \
+                -o -iname 'build' \
+                -o -iname 'install' \
+                -o -iname 'target' \
+                -o -iname 'spec' \
+                -o -iname 'benches' \
+                -o -iname 'test' \
+                -o -iname 'tests' \
+                -o -iname 'test_data' \
+                -o -iname 'doc' \
+                -o -iname 'docs' \
+                -o -iname 'help' \
+                -o -iname 'man' \
+                -o -iname 'po' \
+                -o -iname 'i18n' \
+                -o -iname 'fonts' \
+                -o -iname 'img' \
+                -o -iname 'assets' \
+                -o -iname 'static' \
+                -o -iname 'styles' \
+                -o -iname 'icons' \
+                -o -iname 'pixmaps' \
+                -o -iname 'menus' \
+                -o -iname 'keymaps' \
+                -o -iname 'snippets' \
+                -o -iname 'settings' \
+                -o -iname 'grammars' \
+                -o -iname 'config' \
+                -o -iname 'client' \
+                -o -iname 'server' \
+                -o -iname 'backend' \
+                -o -iname 'frontend' \
             ')' \
             -prune \
             -o '(' \
