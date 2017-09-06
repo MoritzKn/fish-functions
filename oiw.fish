@@ -1,7 +1,7 @@
 # Defined in /tmp/fish.CDCVU3/oiw.fish @ line 2
 function oiw --description 'Find a project/folder in your workspace and cd into it'
-	function find_folders
-        find $HOME \
+    function find_folders
+        find -L $HOME \
             -mindepth 1 \
             -maxdepth 5 \
             '(' \
@@ -44,7 +44,6 @@ function oiw --description 'Find a project/folder in your workspace and cd into 
                 -o -iname 'snippets' \
                 -o -iname 'settings' \
                 -o -iname 'grammars' \
-                -o -iname 'config' \
                 -o -iname 'client' \
                 -o -iname 'server' \
                 -o -iname 'backend' \
@@ -68,7 +67,11 @@ function oiw --description 'Find a project/folder in your workspace and cd into 
         | head -1 \
         | read shortest
 
-    cd $shortest
+    if test ! -z "$shortest"
+        cd $shortest
+    else
+        echo 'Could not find anything, sorry'
+    end
 
     functions -e findFolders
 end
