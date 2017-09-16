@@ -17,7 +17,7 @@ function do --description 'Do what I want'
 
     if test -z "$subject"
         echo 'Nothing to do'
-        exit
+        return
     end
 
     switch "$subject"
