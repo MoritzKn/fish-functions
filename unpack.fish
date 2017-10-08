@@ -6,5 +6,7 @@ function unpack
         unzip $argv
     case '*.rar'
         unrar x $argv
+    case '*.gz'
+        gzip -d $argv
     end
 end
