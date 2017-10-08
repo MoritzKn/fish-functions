@@ -29,7 +29,7 @@ function do --description 'Do what I want'
         case '*.tgz' '*.tbz' '*.tar' '*.tar.*' '*.zip' '*.rar'
             set command 'unpack'
         case 'http://*' 'https://*'
-            set command 'curl -O '
+            set command 'curl -L -O '
         case '*'
             set command 'open'
     end
