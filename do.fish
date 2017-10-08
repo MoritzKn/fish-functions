@@ -28,6 +28,8 @@ function do --description 'Do what I want'
             set command 'git clone'
         case '*.tgz' '*.tbz' '*.tar' '*.tar.*' '*.zip' '*.rar'
             set command 'unpack'
+        case 'http://*' 'https://*'
+            set command 'curl -O '
         case '*'
             set command 'open'
     end
