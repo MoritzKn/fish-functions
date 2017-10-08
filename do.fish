@@ -26,10 +26,10 @@ function do --description 'Do what I want'
     switch "$subject"
         case 'git@*.git' 'https://*.git' 'git://*'
             set command 'git clone'
-        case '*.tgz' '*.tbz' '*.tar' '*.tar.*' '*.zip' '*.rar'
-            set command 'unpack'
         case 'http://*' 'https://*'
             set command 'curl -L -O '
+        case '*.tgz' '*.tbz' '*.tar' '*.tar.*' '*.zip' '*.rar'
+            set command 'unpack'
         case '*'
             set command 'open'
     end
