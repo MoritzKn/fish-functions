@@ -3,13 +3,16 @@ function do --description 'Do what I want'
     set -l command ''
 
     if test -z "$subject"
-        if which xclip > /dev/null
+        if type -q xclip
             set subject (xclip -o -selection clipboard)
             if test -z "$subject"
                 set subject (xclip -o)
             end
-        else if which pbpaste > /dev/null
+        else if type -q pbpaste
             set subject (pbpaste)
+        else
+            echo 'No clipboard utility found'
+            return
         end
     end
 
