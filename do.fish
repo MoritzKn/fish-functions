@@ -23,10 +23,9 @@ function do --description 'Do what I want'
         return
     end
 
-    echo Subject: $subject
-
     switch "$subject"
         case 'git@*.git' 'https://*.git' 'git://*'
+            echo "Clone repo: $subject"
             git clone $subject
             set -l name (string match -r '/([a-zA-Z_-]+)/?(?:\\.git)?$' $subject | sed -n 2p)
             if test -n $name
@@ -34,13 +33,24 @@ function do --description 'Do what I want'
                 atom -a .
             end
 
+        case 'feature/*'
+            echo "Checkout feature: $subject"
+            git checkout $subject
+
+        case 'https://github.com/*/*/pull/*'
+            echo "Checkout PR: $subject"
+            hub checkout $subject
+
         case 'http://*' 'https://*'
+            echo "Download: $subject"
             curl -LO $subject
 
         case '*.tgz' '*.tbz' '*.tar' '*.tar.*' '*.zip' '*.rar' '*gz'
+            echo "Unpack: $subject"
             unpack $subject
 
         case '*'
+            echo "Open: $subject"
             open $subject
     end
 end
