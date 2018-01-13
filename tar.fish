@@ -1,5 +1,5 @@
 function tar
-    if type -q gtar > /dev/null
+    if type -q gtar
         gtar $argv
     else
         command tar $argv

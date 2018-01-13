@@ -2,7 +2,7 @@ function tid --description 'Today I did -- Show what you did in the current git 
     # Use GNU sed if available. Other versione (e.g. BSG / Mac) may not support
     # the I (ignore case) regex flag.
     function mysed
-        if which gsed > /dev/null
+        if type -q gsed
             gsed $argv
         else
             sed $argv
