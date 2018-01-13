@@ -1,4 +1,3 @@
-# Defined in /tmp/fish.CDCVU3/oiw.fish @ line 2
 function oiw --description 'Find a project/folder in your workspace and cd into it'
     function find_folders
         find -L $HOME \
