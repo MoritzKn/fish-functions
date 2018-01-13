@@ -23,19 +23,24 @@ function do --description 'Do what I want'
         return
     end
 
+    echo Subject: $subject
+
     switch "$subject"
         case 'git@*.git' 'https://*.git' 'git://*'
-            set command 'git clone'
+            git clone $subject
+            set -l name (string match -r '/([a-zA-Z_-]+)/?(?:\\.git)?$' $subject | sed -n 2p)
+            if test -n $name
+                cd $name
+                atom -a .
+            end
+
         case 'http://*' 'https://*'
-            set command 'curl -L -O '
+            curl -LO $subject
+
         case '*.tgz' '*.tbz' '*.tar' '*.tar.*' '*.zip' '*.rar' '*gz'
-            set command 'unpack'
+            unpack $subject
+
         case '*'
-            set command 'open'
+            open $subject
     end
-
-    echo Subject: $subject
-    echo Command: $command
-
-    eval $command $subject
 end
