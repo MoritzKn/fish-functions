@@ -1,6 +1,13 @@
 function do --description 'Do what I want'
+    set -l arg_count (count $argv)
+    if test "$arg_count" -gt 1
+        for i in (seq 1 $arg_count)
+            do $argv[$i]
+        end
+        return
+    end
+
     set -l subject "$argv"
-    set -l command ''
 
     if test -z "$subject"
         if type -q xclip
