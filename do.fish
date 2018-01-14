@@ -115,6 +115,12 @@ function do --description 'Do what I want'
             open $subject
     end
 
+    if set -l path (string replace -a '~' ~ $subject)
+        if test -e $path
+            set subject $path
+        end
+    end
+
     if test -e $subject
         if test -d $subject
             echo "Cd into: $subject"
