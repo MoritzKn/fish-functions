@@ -103,8 +103,42 @@ function do --description 'Do what I want'
             echo "Unpack: $subject"
             unpack $subject
 
-        case '*'
+        case '*://*'
             echo "Open: $subject"
             open $subject
     end
+
+    if test -e $subject
+        if test -d $subject
+            echo "Cd into: $subject"
+            cd $subject
+            return
+        end
+
+        if test -x $subject
+            echo "Execute: $subject"
+            eval $subject
+            return
+        end
+
+        set -l type (xdg-mime query filetype $subject)
+
+        if string match 'text/*' $type > /dev/null
+            if test -w $subject
+                echo "Edit: $subject"
+                vim $subject
+                return
+            else
+                echo "Edit as root: $subject"
+                sudo vim $subject
+                return
+            end
+        end
+
+        echo "Open: $subject"
+        open $subject
+        return
+    end
+
+    echo "Can't do anything with: $subject"
 end
