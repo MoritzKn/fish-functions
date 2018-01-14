@@ -24,40 +24,67 @@ function do --description 'Do what I want'
     end
 
     switch "$subject"
-        case 'git@*.git' 'https://*.git' 'git://*'
+        case 'https://github.com/*/*/pull/*'
+            echo "Checkout PR: $subject"
+            hub checkout $subject
+
+        case 'git@*.git' 'https://*.git' 'git://*' 'https://github.com/*/*'
             set -l repo (string match -r '/([a-zA-Z_-]+)/?(?:\\.git)?$' $subject | sed -n 2p)
 
-            if begin; test -n "$repo"; and string match -e github $subject; end
+            if begin; test -n "$repo"; and string match -e 'github.com' $subject > /dev/null; end
                 set -l owner (string match -r '(?:/|:)([a-zA-Z_-]+)/[a-zA-Z_-]+/?(?:\\.git)?$' $subject | sed -n 2p)
-                set -l url https://api.github.com/repos/$owner/$repo
-                set -l info (curl $url -s)
+                set -l api_url https://api.github.com/repos/$owner/$repo
+                set -l info (curl $api_url -s)
 
-                if test -n "$info" -a (echo $info | jq .fork -r) = true
-                    set -l remote (git config --get remote.origin.url)
-                    set -l git_url (echo $info | jq .parent.git_url -r)
-                    set -l ssh_url (echo $info | jq .parent.ssh_url -r)
-                    set -l https_url (echo $info | jq .parent.clone_url -r)
-                    set -l parent_name (echo $info | jq .parent.name -r)
+                if test -n "$info"
+                    set -l ssh_url (echo $info | jq .ssh_url -r)
 
-                    if test -z "$remote"
-                        echo "Clone parent ($ssh_url) and add fork ($subject) as remote"
-                        git clone $ssh_url
-                        cd $parent_name
-                        git remote add fork $subject
+                    if test (echo $info | jq .fork -r) = true
+                        set -l remote (git config --get remote.origin.url)
+                        set -l parent_git_url (echo $info | jq .parent.git_url -r)
+                        set -l parent_ssh_url (echo $info | jq .parent.ssh_url -r)
+                        set -l parent_https_url (echo $info | jq .parent.clone_url -r)
+                        set -l parent_name (echo $info | jq .parent.name -r)
+                        set -l add_remote
+
+                        if test -z "$remote"
+                            echo "Clone parent repo: $parent_ssh_url"
+                            git clone $parent_ssh_url; or return 1
+                            cd $parent_name
+                            set add_remote yes
+
+                        else if test "$remote" = "$parent_git_url" -o \
+                            "$remote" = "$parent_ssh_url" -o \
+                            "$remote" = "$parent_https_url"
+
+                            set add_remote yes
+                        end
+
+                        if test -n "$add_remote"
+                            set -l new_remote
+                            if test -n "$ssh_url"
+                                set new_remote $ssh_url
+                            else
+                                set new_remote $subject
+                            end
+
+                            echo "Add fork as remote: $new_remote"
+                            git remote add fork $new_remote
+                            atom -a .
+                            return
+                        end
+                    else if test -n "$ssh_url"
+                        echo "Clone repo (ssh): $subject"
+                        git clone $subject; or return 1
+                        cd $repo
                         atom -a .
-                        return
-                    end
-
-                    if test "$remote" = "$git_url" -o "$remote" = "$ssh_url" -o "$remote" = "$https_url"
-                        echo "Add remote: $subject"
-                        git remote add fork $subject
                         return
                     end
                 end
             end
 
             echo "Clone repo: $subject"
-            git clone $subject
+            git clone $subject; or return 1
 
             if test -n "$repo"
                 cd $repo
@@ -67,10 +94,6 @@ function do --description 'Do what I want'
         case 'feature/*'
             echo "Checkout feature: $subject"
             git checkout $subject
-
-        case 'https://github.com/*/*/pull/*'
-            echo "Checkout PR: $subject"
-            hub checkout $subject
 
         case 'http://*' 'https://*'
             echo "Download: $subject"
