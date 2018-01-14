@@ -147,5 +147,11 @@ function do --description 'Do what I want'
         return
     end
 
+    if which (string split ' ' $subject)[1] > /dev/null ^/dev/null
+        echo "Execute: $subject"
+        eval $subject
+        return
+    end
+
     echo "Can't do anything with: $subject"
 end
