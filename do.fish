@@ -131,13 +131,22 @@ function do --description 'Do what I want'
         set -l type (xdg-mime query filetype $subject)
 
         if string match 'text/*' $type > /dev/null
+            set -l editor
+            if test -n "EDITOR"
+                set editor $EDITOR
+            else if test -n "VISUAL"
+                set editor $VISUAL
+            else
+                set editor vim
+            end
+
             if test -w $subject
                 echo "Edit: $subject"
-                vim $subject
+                eval $editor $subject
                 return
             else
                 echo "Edit as root: $subject"
-                sudo vim $subject
+                sudo $editor $subject
                 return
             end
         end
