@@ -138,9 +138,9 @@ function do --description 'Do what I want'
 
         if string match 'text/*' $type > /dev/null
             set -l editor
-            if test -n "EDITOR"
+            if test -n "$EDITOR"
                 set editor $EDITOR
-            else if test -n "VISUAL"
+            else if test -n "$VISUAL"
                 set editor $VISUAL
             else
                 set editor vim
