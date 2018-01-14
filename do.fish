@@ -1,4 +1,16 @@
 function do --description 'Do what I want'
+    function add_to_history --arg cmd
+        set -l time (date +%s)
+        echo -e "- cmd: $cmd\n  when: $time" >> ~/.local/share/fish/fish_history
+    end
+
+    function main_action
+        set -l action "$argv"
+        eval $action
+        add_to_history $action
+        history merge
+    end
+
     set -l arg_count (count $argv)
     if test "$arg_count" -gt 1
         for i in (seq 1 $arg_count)
@@ -56,7 +68,7 @@ function do --description 'Do what I want'
 
                         if test -z "$remote"
                             echo "Clone parent repo: $parent_ssh_url"
-                            git clone $parent_ssh_url; or return 1
+                            main_action git clone $parent_ssh_url; or return 1
                             cd $parent_name
                             set add_remote yes
 
@@ -76,13 +88,13 @@ function do --description 'Do what I want'
                             end
 
                             echo "Add fork as remote: $new_remote"
-                            git remote add fork $new_remote
+                            main_action git remote add fork $new_remote
                             atom -a .
                             return
                         end
                     else if test -n "$ssh_url"
                         echo "Clone repo (ssh): $subject"
-                        git clone $subject; or return 1
+                        main_action git clone $subject; or return 1
                         cd $repo
                         atom -a .
                         return
@@ -91,28 +103,33 @@ function do --description 'Do what I want'
             end
 
             echo "Clone repo: $subject"
-            git clone $subject; or return 1
+            main_action git clone $subject; or return 1
 
             if test -n "$repo"
                 cd $repo
                 atom -a .
             end
+            return
 
         case 'feature/*'
             echo "Checkout feature: $subject"
-            git checkout $subject
+            main_action git checkout $subject
+            return
 
         case 'http://*' 'https://*'
             echo "Download: $subject"
-            curl -LO $subject
+            main_action curl -LO $subject
+            return
 
         case '*.tgz' '*.tbz' '*.tar' '*.tar.*' '*.zip' '*.rar' '*gz'
             echo "Unpack: $subject"
-            unpack $subject
+            main_action unpack $subject
+            return
 
         case '*://*'
             echo "Open: $subject"
-            open $subject
+            main_action open $subject
+            return
     end
 
     if set -l path (string replace -a '~' ~ $subject)
@@ -124,13 +141,13 @@ function do --description 'Do what I want'
     if test -e $subject
         if test -d $subject
             echo "Cd into: $subject"
-            cd $subject
+            main_action cd $subject
             return
         end
 
         if test -x $subject
             echo "Execute: $subject"
-            eval $subject
+            main_action $subject
             return
         end
 
@@ -148,23 +165,23 @@ function do --description 'Do what I want'
 
             if test -w $subject
                 echo "Edit: $subject"
-                eval $editor $subject
+                main_action "$editor $subject"
                 return
             else
                 echo "Edit as root: $subject"
-                sudo $editor $subject
+                main_action sudo $editor $subject
                 return
             end
         end
 
         echo "Open: $subject"
-        open $subject
+        main_action open $subject
         return
     end
 
     if which (string split ' ' $subject)[1] > /dev/null ^/dev/null
         echo "Execute: $subject"
-        eval $subject
+        main_action $subject
         return
     end
 
