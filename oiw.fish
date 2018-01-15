@@ -72,5 +72,5 @@ function oiw --description 'Find a project/folder in your workspace and cd into 
         echo 'Could not find anything, sorry'
     end
 
-    functions -e findFolders
+    functions -e find_folders
 end
