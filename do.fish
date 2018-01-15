@@ -47,7 +47,7 @@ function do --description 'Do what I want'
         switch "$subject"
             case 'https://github.com/*/*/pull/*'
                 echo "Checkout PR: $subject"
-                do_action hub checkout $subject
+                do_action "hub checkout $subject"
 
             case 'git@*.git' 'https://*.git' 'git://*' 'https://github.com/*/*'
                 set -l repo (string match -r '/([a-zA-Z_-]+)/?(?:\\.git)?$' $subject | sed -n 2p)
@@ -70,8 +70,8 @@ function do --description 'Do what I want'
 
                             if test -z "$remote"
                                 echo "Clone parent repo: $parent_ssh_url"
-                                do_action git clone $parent_ssh_url; or return 1
-                                do_action cd $parent_name
+                                do_action "git clone $parent_ssh_url"; or return 1
+                                do_action "cd $parent_name"
                                 set add_remote yes
 
                             else if test "$remote" = "$parent_git_url" -o \
@@ -90,47 +90,47 @@ function do --description 'Do what I want'
                                 end
 
                                 echo "Add fork as remote: $new_remote"
-                                do_action git remote add fork $new_remote
-                                do_action atom -a .
+                                do_action "git remote add fork $new_remote"
+                                do_action "atom -a ."
                                 return
                             end
                         else if test -n "$ssh_url"
                             echo "Clone repo (ssh): $subject"
-                            do_action git clone $subject; or return 1
-                            do_action cd $repo
-                            do_action atom -a .
+                            do_action "git clone $subject"; or return 1
+                            do_action "cd $repo"
+                            do_action "atom -a ."
                             return
                         end
                     end
                 end
 
                 echo "Clone repo: $subject"
-                do_action git clone $subject; or return 1
+                do_action "git clone $subject"; or return 1
 
                 if test -n "$repo"
-                    do_action cd $repo
-                    do_action atom -a .
+                    do_action "cd $repo"
+                    do_action "atom -a ."
                 end
                 return
 
             case 'feature/*'
                 echo "Checkout feature: $subject"
-                do_action git checkout $subject
+                do_action "git checkout $subject"
                 return
 
             case 'http://*' 'https://*'
                 echo "Download: $subject"
-                do_action curl -LO $subject
+                do_action "curl -LO $subject"
                 return
 
             case '*.tgz' '*.tbz' '*.tar' '*.tar.*' '*.zip' '*.rar' '*gz'
                 echo "Unpack: $subject"
-                do_action unpack $subject
+                do_action "unpack $subject"
                 return
 
             case '*://*'
                 echo "Open: $subject"
-                do_action open $subject
+                do_action "open $subject"
                 return
         end
 
@@ -143,13 +143,13 @@ function do --description 'Do what I want'
         if test -e "$subject"
             if test -d "$subject"
                 echo "Cd into: $subject"
-                do_action cd $subject
+                do_action "cd $subject"
                 return
             end
 
             if test -x "$subject"
                 echo "Execute: $subject"
-                do_action $subject
+                do_action "$subject"
                 return
             end
 
@@ -171,13 +171,13 @@ function do --description 'Do what I want'
                     return
                 else
                     echo "Edit as root: $subject"
-                    do_action sudo $editor $subject
+                    do_action "sudo $editor $subject"
                     return
                 end
             end
 
             echo "Open: $subject"
-            do_action open $subject
+            do_action "open $subject"
             return
         end
 
@@ -191,7 +191,7 @@ function do --description 'Do what I want'
 
         if test -x "$first_word"
             echo "Execute: $subject"
-            do_action './'$subject
+            do_action ./$subject
             return
         end
 
