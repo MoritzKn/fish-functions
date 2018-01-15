@@ -14,10 +14,9 @@ function do --description 'Do what I want'
     end
 
     function main
-        set -l arg_count (count $argv)
-        if test "$arg_count" -gt 1
-            for i in (seq 1 $arg_count)
-                do $argv[$i]
+        if test (count $argv) -gt 1
+            for arg in $argv
+                main $arg; or return $status
             end
             return
         end
@@ -199,7 +198,7 @@ function do --description 'Do what I want'
         echo "Nothing to do with: $subject"
     end
 
-    main
+    main $argv
     set -l main_status $status
 
     functions -e do_action
