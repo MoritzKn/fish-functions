@@ -1,13 +1,15 @@
 function do --description 'Do what I want'
-    function add_to_history --arg cmd
+    function add_to_history
+        set -l cmd (string join '\n' $argv)
         set -l time (date +%s)
-        echo -e "- cmd: $cmd\n  when: $time" >> ~/.local/share/fish/fish_history
+        echo "- cmd: $cmd"\n"  when: $time" >> ~/.local/share/fish/fish_history
     end
 
     function do_action
-        set -l action "$argv"
-        eval $action
-        add_to_history $action
+        for line in (string split \n $argv)
+            eval $line
+        end
+        add_to_history $argv
         history merge
     end
 
@@ -134,19 +136,19 @@ function do --description 'Do what I want'
         end
 
         if set -l path (string replace -a '~' ~ $subject)
-            if test -e $path
+            if test -e "$path"
                 set subject $path
             end
         end
 
-        if test -e $subject
-            if test -d $subject
+        if test -e "$subject"
+            if test -d "$subject"
                 echo "Cd into: $subject"
                 do_action cd $subject
                 return
             end
 
-            if test -x $subject
+            if test -x "$subject"
                 echo "Execute: $subject"
                 do_action $subject
                 return
@@ -164,7 +166,7 @@ function do --description 'Do what I want'
                     set editor vim
                 end
 
-                if test -w $subject
+                if test -w "$subject"
                     echo "Edit: $subject"
                     do_action "$editor $subject"
                     return
@@ -188,7 +190,7 @@ function do --description 'Do what I want'
             return
         end
 
-        if test -x $first_word
+        if test -x "$first_word"
             echo "Execute: $subject"
             do_action './'$subject
             return
