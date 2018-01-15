@@ -186,7 +186,7 @@ function do --description 'Do what I want'
             return
         end
 
-        echo "Can't do anything with: $subject"
+        echo "Nothing to do with: $subject"
     end
 
     main
