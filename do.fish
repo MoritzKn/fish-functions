@@ -180,9 +180,17 @@ function do --description 'Do what I want'
             return
         end
 
-        if which (string split ' ' $subject)[1] > /dev/null ^/dev/null
+        set -l first_word (string split ' ' $subject)[1]
+
+        if which $first_word > /dev/null ^/dev/null
             echo "Execute: $subject"
             do_action $subject
+            return
+        end
+
+        if test -x $first_word
+            echo "Execute: $subject"
+            do_action './'$subject
             return
         end
 
