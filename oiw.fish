@@ -7,6 +7,7 @@ function oiw --description 'Find a project/folder in your workspace and cd into 
                 -name 'node_modules' \
                 -o -name '.*' \
                 -o -name '_*' \
+                -o -name '*.bak' \
                 -o -iname 'bin' \
                 -o -iname 'lib' \
                 -o -iname 'src' \
