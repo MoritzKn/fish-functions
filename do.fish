@@ -48,6 +48,7 @@ function do --description 'Do what I want'
             case 'https://github.com/*/*/pull/*'
                 echo "Checkout PR: $subject"
                 do_action "hub checkout $subject"
+                return
 
             case 'git@*.git' 'https://*.git' 'git://*' 'https://github.com/*/*'
                 set -l repo (string match -r '/([a-zA-Z_-]+)/?(?:\\.git)?$' $subject | sed -n 2p)
