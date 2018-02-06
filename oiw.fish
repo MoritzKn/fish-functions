@@ -60,7 +60,9 @@ function oiw --description 'Find a project/folder in your workspace and cd into 
             -print
     end
 
-    find_folders $argv \
+    set -l query (string join '*' $argv)
+
+    find_folders $query \
         | awk '{ print length($0) " " $0; }' \
         | sort -n \
         | cut -d ' ' -f 2- \
