@@ -1,4 +1,6 @@
 function fish_prompt --description 'Prompt ausgeben'
+    set -l last_status $status
+
     set hostname (hostname | cut -d . -f 1)
 
     set -l color_cwd
@@ -16,6 +18,28 @@ function fish_prompt --description 'Prompt ausgeben'
         set suffix '>'
     end
 
+    set -l status_warning ''
+    if test $last_status -ne 0
+        #iterm-tab-color 198 3 55
+        set status_warning " ($last_status) "
+    end
+
+    if test (pwd) = "$HOME"
+        iterm-tab-color 80 127 229
+    else if string match -e 'backup' (pwd) > /dev/null
+        iterm-tab-color 99 175 73
+    else if test -f docker-compose.yaml
+        iterm-tab-color 114 171 255
+    else if pwd | grep service > /dev/null
+        iterm-tab-color 227 238 239
+    else if pwd | grep package > /dev/null
+        iterm-tab-color 102 62 11
+    else if test -d .git
+        iterm-tab-color 243 78 40
+    else
+        iterm-tab-color
+    end
+
     # $USER
-    echo -n -s $hostname (set_color $color_cwd) (prompt_pwd) (set_color normal) "$suffix "
+    echo -n -s $hostname (set_color $color_cwd) (prompt_pwd) (set_color normal) $status_warning "$suffix "
 end
