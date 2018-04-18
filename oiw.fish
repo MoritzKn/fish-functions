@@ -1,10 +1,18 @@
 function oiw --description 'Find a project/folder in your workspace and cd into it'
+    if test (count $argv) -eq 0
+        echo Please provide a query
+        return
+    end
+
+
     function find_folders
         find -L $HOME \
             -mindepth 1 \
             -maxdepth 5 \
             '(' \
                 -name 'node_modules' \
+                -o -name 'vendor' \
+                -o -name 'libs' \
                 -o -name '.*' \
                 -o -name '_*' \
                 -o -name '*.bak' \

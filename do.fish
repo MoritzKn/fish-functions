@@ -197,6 +197,7 @@ function do --description 'Do what I want'
         end
 
         echo "Nothing to do with: $subject"
+        return
     end
 
     main $argv
