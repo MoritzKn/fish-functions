@@ -24,9 +24,7 @@ function fish_prompt --description 'Prompt ausgeben'
         set status_warning " ($last_status) "
     end
 
-    if test (pwd) = "$HOME"
-        iterm-tab-color 80 127 229
-    else if string match -e 'backup' (pwd) > /dev/null
+    if string match -e 'backup' (pwd) > /dev/null
         iterm-tab-color 99 175 73
     else if test -f docker-compose.yaml
         iterm-tab-color 114 171 255
