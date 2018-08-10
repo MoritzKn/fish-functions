@@ -1,7 +1,7 @@
 function yarn
     if test (count $argv) -gt 0
         switch $argv[1]
-            case 'start' 'dev' 'inspect'
+            case 'start' 'serve' 'build' 'depoy' 'dev' 'inspect'
                 iterm-tab-color 36 136 182
         end
     end
