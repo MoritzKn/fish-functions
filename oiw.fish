@@ -56,6 +56,8 @@ function oiw --description 'Find a project/folder in your workspace and cd into 
                 -o -iname 'server' \
                 -o -iname 'backend' \
                 -o -iname 'frontend' \
+                -o -iname 'Library' \
+                -o -iname 'Pictures' \
             ')' \
             -prune \
             -o '(' \
