@@ -116,7 +116,7 @@ function do --description 'Do what I want'
 
             case 'feature/*'
                 echo "Checkout feature: $subject"
-                do_action "git checkout $subject"
+                do_action "git fetch; git checkout $subject; git pull"
                 return
 
             case 'http://*' 'https://*'
