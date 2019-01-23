@@ -3,6 +3,9 @@ function j --description "j for jump"
         case 'ff'
             cd ~/.config/fish/functions
             return
+        case 'ssr'
+            z 'hub*service*ssr'
+            return
         case 'mono'
             z 'hubs'
             return
