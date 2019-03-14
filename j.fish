@@ -19,7 +19,7 @@ function j --description "j for jump"
             z 'hub-content-api'
             return
         case 'docker'
-            z 'hub*docker*living'
+            z 'hub*setup*docker'
             return
     end
 
