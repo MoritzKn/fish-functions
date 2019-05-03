@@ -28,13 +28,13 @@ function fish_prompt --description 'Prompt ausgeben'
         iterm-tab-color 99 175 73
     else if test -f docker-compose.yaml
         iterm-tab-color 114 171 255
-    else if pwd | grep service > /dev/null
+    else if pwd | grep service > /dev/null
         iterm-tab-color 227 238 239
-    else if pwd | grep package > /dev/null
+    else if pwd | grep package > /dev/null
         iterm-tab-color 102 62 11
-    else if pwd | grep fish > /dev/null
+    else if pwd | grep fish > /dev/null
         iterm-tab-color 167 207 223
-    else if pwd | grep terraform > /dev/null
+    else if pwd | grep terraform > /dev/null
         iterm-tab-color 105 93 232
     else if test -d .git
         iterm-tab-color 243 78 40
