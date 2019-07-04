@@ -43,5 +43,5 @@ function fish_prompt --description 'Prompt ausgeben'
     end
 
     # $USER
-    echo -n -s $hostname (set_color $color_cwd) (prompt_pwd) (set_color normal) $status_warning "$suffix "
+    echo -n -s [(date '+%H:%M')] ' ' $hostname (set_color $color_cwd) (prompt_pwd) (set_color normal) $status_warning "$suffix "
 end
