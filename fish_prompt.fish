@@ -1,7 +1,7 @@
 function fish_prompt --description 'Prompt ausgeben'
     set -l last_status $status
 
-    set hostname (hostname | cut -d . -f 1)
+    set hn (hostname | cut -d . -f 1)
 
     set -l color_cwd
     set -l suffix
@@ -43,5 +43,5 @@ function fish_prompt --description 'Prompt ausgeben'
     end
 
     # $USER
-    echo -n -s [(date '+%H:%M')] ' ' $hostname (set_color $color_cwd) (prompt_pwd) (set_color normal) $status_warning "$suffix "
+    echo -n -s [(date '+%H:%M')] ' ' $hn (set_color $color_cwd) (prompt_pwd) (set_color normal) $status_warning "$suffix "
 end
