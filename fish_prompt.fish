@@ -26,8 +26,6 @@ function fish_prompt --description 'Prompt ausgeben'
 
     if string match -e 'backup' (pwd) > /dev/null
         iterm-tab-color 99 175 73
-    else if test -f docker-compose.yaml
-        iterm-tab-color 114 171 255
     else if pwd | grep service > /dev/null
         iterm-tab-color 227 238 239
     else if pwd | grep package > /dev/null
@@ -38,6 +36,8 @@ function fish_prompt --description 'Prompt ausgeben'
         iterm-tab-color 105 93 232
     else if test -d .git
         iterm-tab-color 243 78 40
+    else if test -f docker-compose.yaml
+        iterm-tab-color 114 171 255
     else
         iterm-tab-color
     end
