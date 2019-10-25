@@ -8,5 +8,7 @@ function unpack
         unrar x $argv
     case '*.gz'
         gzip -d $argv
+    case '*.bz2'
+        bzip2 -dk $argv
     end
 end
