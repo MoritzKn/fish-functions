@@ -9,7 +9,7 @@ function do --description 'Do what I want'
     # Execute a command and add it to history as if a user would have executed it
     function do_action
         for line in (string split \n $argv)
-            eval $line
+            eval $line; or return $status
         end
         add_to_history $argv
         history merge
