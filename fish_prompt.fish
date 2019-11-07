@@ -20,28 +20,28 @@ function fish_prompt --description 'Prompt ausgeben'
 
     set -l status_warning ''
     if test $last_status -ne 0
-        #iterm-tab-color 198 3 55
+        #tab-color "#c60337"
         set status_warning " ($last_status) "
     end
 
     if pwd | grep backup > /dev/null
-        iterm-tab-color 99 175 73
+        tab-color "#63af49"
     else if pwd | grep service > /dev/null
-        iterm-tab-color 227 238 239
+        tab-color "#e3eeef"
     else if pwd | grep package > /dev/null
-        iterm-tab-color 102 62 11
+        tab-color "#663e0b"
     else if pwd | grep fish > /dev/null
-        iterm-tab-color 167 207 223
+        tab-color "#a7cfdf"
     else if pwd | grep '/private/' > /dev/null
-        iterm-tab-color 236 108 185
+        tab-color "#ec6cb9"
     else if pwd | grep -E 'terraform|tf' > /dev/null
-        iterm-tab-color 105 93 232
+        tab-color "#695de8"
     else if test -d .git
-        iterm-tab-color 243 78 40
+        tab-color "#f34e28"
     else if test -f docker-compose.yaml
-        iterm-tab-color 114 171 255
+        tab-color "#72abff"
     else
-        iterm-tab-color
+        tab-color
     end
 
     # $USER

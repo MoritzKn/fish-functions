@@ -1,5 +1,5 @@
 function sls
-	iterm-tab-color
+	tab-color "#ff9288"
 	command sls $argv
-	iterm-tab-color
+	tab-color
 end

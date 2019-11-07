@@ -1,5 +1,5 @@
 function vim
-	iterm-tab-color 43 136 0
+	tab-color "#2b8800"
 	command vim $argv
-	iterm-tab-color
+	tab-color
 end

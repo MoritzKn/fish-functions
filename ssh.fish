@@ -1,5 +1,5 @@
 function ssh
-	iterm-tab-color 232 167 37
+	tab-color "#e8a725"
 	command ssh $argv
-	iterm-tab-color
+	tab-color
 end

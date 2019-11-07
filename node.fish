@@ -1,5 +1,5 @@
 function node
-	iterm-tab-color 36 119 0
+	tab-color "#247700"
 	command node $argv
-	iterm-tab-color
+	tab-color
 end

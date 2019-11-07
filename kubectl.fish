@@ -1,5 +1,5 @@
 function kubectl
-	iterm-tab-color 50 109 230
+	tab-color "#326de6"
 	command kubectl $argv
-	iterm-tab-color
+	tab-color
 end
