@@ -1,4 +1,3 @@
-# Defined in - @ line 1
 function fish_greeting
-	
+    # We do not like to be greeted
 end

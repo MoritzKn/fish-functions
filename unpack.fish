@@ -1,7 +1,7 @@
 function unpack
     switch $argv[1]
     case '*.tgz' '*.tbz' '*.tar' '*.tar.*'
-        untar $argv
+        tar -xf $argv
     case '*.zip'
         unzip $argv
     case '*.rar'

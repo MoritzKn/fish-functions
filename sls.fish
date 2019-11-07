@@ -1,5 +1,5 @@
 function sls
-	iterm-tab-color 255 146 136
+	iterm-tab-color
 	command sls $argv
 	iterm-tab-color
 end

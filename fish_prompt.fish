@@ -24,7 +24,7 @@ function fish_prompt --description 'Prompt ausgeben'
         set status_warning " ($last_status) "
     end
 
-    if string match -e 'backup' (pwd) > /dev/null
+    if pwd | grep backup > /dev/null
         iterm-tab-color 99 175 73
     else if pwd | grep service > /dev/null
         iterm-tab-color 227 238 239
@@ -32,6 +32,8 @@ function fish_prompt --description 'Prompt ausgeben'
         iterm-tab-color 102 62 11
     else if pwd | grep fish > /dev/null
         iterm-tab-color 167 207 223
+    else if pwd | grep '/private/' > /dev/null
+        iterm-tab-color 236 108 185
     else if pwd | grep -E 'terraform|tf' > /dev/null
         iterm-tab-color 105 93 232
     else if test -d .git

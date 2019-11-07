@@ -1,27 +1,10 @@
 function j --description "j for jump"
+    # Jump around in your projects
+
     switch "$argv"
         case 'ff'
             cd ~/.config/fish/functions
-            return
-        case 'ssr'
-            z 'hub*service*ssr'
-            return
-        case 'mono'
-            z 'hubs'
-            return
-        case 'hub'
-            z 'hub*apps*living'
-            return
-        case 'index' 'indexer'
-            z 'elasticsearch-indexer'
-            return
-        case 'content'
-            z 'hub-content-api'
-            return
-        case 'docker'
-            z 'hub*setup*docker'
-            return
+        case '*'
+            z $argv
     end
-
-    z $argv
 end
