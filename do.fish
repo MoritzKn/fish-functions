@@ -130,7 +130,9 @@ function do --description 'Do what I want'
             # Check out branch if it starts with feature
             case 'feature/*'
                 echo "Checkout feature: $subject"
-                do_action "git fetch; git checkout $subject; git pull"
+                do_action "git fetch"
+                do_action "git checkout $subject"
+                do_action "git pull"
                 return
 
             # Download a  file
@@ -150,6 +152,14 @@ function do --description 'Do what I want'
                 echo "Open: $subject"
                 do_action "open $subject"
                 return
+        end
+
+        if git branch -r | grep $subject > /dev/null
+            echo "Checkout branch: $subject"
+            do_action "git fetch"
+            do_action "git checkout $subject"
+            do_action "git pull"
+            return
         end
 
         # Resolve ~ for home
