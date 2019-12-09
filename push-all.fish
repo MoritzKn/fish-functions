@@ -4,12 +4,12 @@ function push-all --description "Pull origin and push all other remotes"
       echo "Working tree not clean"
     end
 
-    echo "Pull origin"
+    echo "-- Pull origin --"
     git pull origin
 
     for remote in (git remote)
         if test "$remote" != "origin"
-            echo "Push $remote"
+            echo "-- Push $remote --"
             git push "$remote"
         end
     end
