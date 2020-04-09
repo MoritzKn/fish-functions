@@ -1,4 +1,4 @@
-function version_history
+function git-version-history --description 'Show the commits for each package.json version change'
     if test ! -e package.json
         echo "No package.json"
         return 1

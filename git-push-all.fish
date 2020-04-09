@@ -1,4 +1,4 @@
-function push-all --description "Pull origin and push all other remotes"
+function git-push-all --description "Pull origin and push all other remotes"
     set -l diff (git diff --stat)
     if test "$diff" != ''
       echo "Working tree not clean"
