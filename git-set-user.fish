@@ -1,4 +1,4 @@
-function get-set-user --description "Sets the local git user config"
+function git-set-user --description "Sets the local git user config"
     set -l domain "gmx.de";
     set -l flags
 
