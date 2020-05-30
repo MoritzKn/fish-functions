@@ -59,6 +59,7 @@ function z --description 'Find a project/folder in your workspace and cd into it
                 -o -iname 'test' \
                 -o -iname 'tests' \
                 -o -iname 'vendor' \
+                -o -iname 'deps' \
             ')' \
             -prune \
             -o '(' \
