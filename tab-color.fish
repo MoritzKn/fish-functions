@@ -4,6 +4,11 @@ function tab-color
         return 1
     end
 
+    if not isatty stdout
+        # Not an tty
+       return
+    end
+
     # Init RGB (red, green, blue) values
     set -l r $argv[1]
     set -l g $argv[2]
