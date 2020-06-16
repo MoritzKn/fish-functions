@@ -15,6 +15,10 @@ abbr "!" " do"
 
 abbr "-" "prevd"
 abbr "+" "nextd"
+
+abbr "..." cd ../..
+abbr "...." cd ../../..
+abbr "....." cd ../../../..
 ```
 
 
