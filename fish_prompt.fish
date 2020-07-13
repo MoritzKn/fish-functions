@@ -25,21 +25,21 @@ function fish_prompt --description 'Prompt ausgeben'
     end
 
     if pwd | grep backup > /dev/null
-        tab-color "#63af49"
+        tab-color "#63af49" --force
     else if pwd | grep service > /dev/null
-        tab-color "#e3eeef"
+        tab-color "#e3eeef" --force
     else if pwd | grep package > /dev/null
-        tab-color "#663e0b"
+        tab-color "#663e0b" --force
     else if pwd | grep fish > /dev/null
-        tab-color "#a7cfdf"
+        tab-color "#a7cfdf" --force
     else if pwd | grep '/private/' > /dev/null
-        tab-color "#ec6cb9"
+        tab-color "#ec6cb9" --force
     else if pwd | grep -E 'terraform|tf' > /dev/null
-        tab-color "#695de8"
+        tab-color "#695de8" --force
     else if test -d .git
-        tab-color "#f34e28"
+        tab-color "#f34e28" --force
     else if test -f docker-compose.yaml
-        tab-color "#72abff"
+        tab-color "#72abff" --force
     else
         tab-color
     end

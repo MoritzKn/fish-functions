@@ -4,8 +4,16 @@ function tab-color
         return 1
     end
 
-    if not isatty stdout
-        # Not an tty
+    set -l force 'no'
+
+    for arg in $argv
+      if test arg = '--foce'
+          set force 'yes'
+      end
+    end
+
+    if not isatty stdout && test force = 'no'
+        # Not a tty
        return
     end
 
