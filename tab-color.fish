@@ -4,15 +4,7 @@ function tab-color
         return 1
     end
 
-    set -l force 'no'
-
-    for arg in $argv
-      if test arg = '--foce'
-          set force 'yes'
-      end
-    end
-
-    if not isatty stdout && test force = 'no'
+    if not isatty stdout && test "$FORCE" != 'yes'
         # Not a tty
        return
     end

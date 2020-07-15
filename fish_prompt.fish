@@ -24,25 +24,27 @@ function fish_prompt --description 'Prompt ausgeben'
         set status_warning " ($last_status) "
     end
 
+    set -x FORCE yes
     if pwd | grep backup > /dev/null
-        tab-color "#63af49" --force
+        tab-color "#63af49"
     else if pwd | grep service > /dev/null
-        tab-color "#e3eeef" --force
+        tab-color "#e3eeef"
     else if pwd | grep package > /dev/null
-        tab-color "#663e0b" --force
+        tab-color "#663e0b"
     else if pwd | grep fish > /dev/null
-        tab-color "#a7cfdf" --force
+        tab-color "#a7cfdf"
     else if pwd | grep '/private/' > /dev/null
-        tab-color "#ec6cb9" --force
+        tab-color "#ec6cb9"
     else if pwd | grep -E 'terraform|tf' > /dev/null
-        tab-color "#695de8" --force
+        tab-color "#695de8"
     else if test -d .git
-        tab-color "#f34e28" --force
+        tab-color "#f34e28"
     else if test -f docker-compose.yaml
-        tab-color "#72abff" --force
+        tab-color "#72abff"
     else
         tab-color
     end
+    set -e FORCE
 
     # $USER
     echo -n -s [(date '+%H:%M')] ' ' $hn ' ' (set_color $color_cwd) (prompt_pwd) (set_color normal) $status_warning "$suffix "
