@@ -60,13 +60,18 @@ function z --description 'Find a project/folder in your workspace and cd into it
                 -o -iname 'tests' \
                 -o -iname 'vendor' \
                 -o -iname 'deps' \
+                -o -name 'Google Drive' \
+                -o -name 'Movies' \
+                -o -name 'Uni' \
+                -o -name 'Applications' \
+                -o -name 'Desktop' \
             ')' \
             -prune \
             -o '(' \
                 -type d \
                 '(' \
-                    -iwholename "$HOME/workspace*$argv*" \
-                    -o -iwholename "$HOME/code/*$argv*" \
+                    -iwholename "$HOME/code/*$argv*" \
+                    -o -iwholename "$HOME/workspace*$argv*" \
                     -o -iwholename "$HOME/projects/*$argv*" \
                 ')' \
             ')' \
