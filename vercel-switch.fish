@@ -1,4 +1,4 @@
-function vercel-client
+function vercel-switch
   echo "====="
   echo "\$ vercel link -p $argv"
   vercel link -p $argv
