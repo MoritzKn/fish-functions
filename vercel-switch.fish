@@ -1,7 +1,7 @@
 function vercel-switch
   echo "====="
-  echo "\$ vercel link -p $argv"
-  vercel link -p $argv
+  echo "\$ vercel link -p $argv" --scope forsuxess --yes
+  vercel link -p $argv --scope forsuxess --yes
 
   and echo "====="
   echo "\$ vercel env pull"
